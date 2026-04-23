@@ -1,15 +1,11 @@
 ---
 title: "CCA `CompEcon` Replication Project"
-subtitle: "Replication of xxxx by i,j and k (AER, 2024)"
+subtitle: "Replication of The Political Legacy of Entertainment TV by Durante, Pinotti and Tesei (AER, 2019)"
 author: 
-  - name: Student 1
-    orcid: 0000-0000-0000-0000
-    email: your.email@com
-    affiliations: Uni Turin, Collegio Carlo Alberto
-  - name: Student 2
-    orcid: 0000-0000-0000-0000
-    email: your.email@com
-    affiliations: Uni Turin, Collegio Carlo Alberto
+  - name: Francesco Checola
+    orcid: 0009-0008-8503-1530
+    email: francesco.checola@unito.it
+    affiliations: University of Turin, Collegio Carlo Alberto
 ---
 
 
