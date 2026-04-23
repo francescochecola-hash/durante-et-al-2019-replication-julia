@@ -112,3 +112,12 @@ using Plots
 
 plot(rand(10), title="Placeholder – Signal Strength")
 ```
+
+```{julia}
+using StatFiles, DataFrames
+
+df = DataFrame(load("replication-package/data/raw/municipality-level_data.dta"))
+
+display(first(df, 5))
+display(names(df))
+```
