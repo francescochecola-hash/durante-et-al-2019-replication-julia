@@ -165,3 +165,7 @@ TEMPLATE_files/
 /.quarto/
 
 **/*.quarto_ipynb
+
+# Quarto output
+report.html
+report_files/
