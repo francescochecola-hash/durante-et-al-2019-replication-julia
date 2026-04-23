@@ -105,7 +105,7 @@ This figure replicates the geographical distribution of Mediaset signal strength
 
 Panel A shows predicted signal strength, while Panel B reports signal strength in free space, excluding geographical obstacles.
 
-Work in progress.
+Work in progress: data cleaning and geographical mapping.
 
 ```{julia}
 using Plots
