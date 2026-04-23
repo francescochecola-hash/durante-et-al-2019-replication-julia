@@ -29,11 +29,17 @@ This report presents a replication of the empirical results in:
 
 The analysis is conducted using the `Julia` programming language.
 
-We have been able to replicate the following exhibits:
+We aim to replicate the following exhibits:
 
-1. figure one
-2. figure two
-3. table three
+1. Figure 4 – Mediaset Signal Strength (1985)
+2. Table 1 – Balance Tests: Exposure to Mediaset and Voting for Italian Main Parties (1972–1992)
+3. Table 2 – Balance Tests: Exposure to Mediaset and Municipality Characteristics
+4. Table 3 – Main Results: Exposure to Mediaset and Voting for Forza Italia (1994)
+5. Table 4 – Robustness: Exposure to Mediaset and Voting for Forza Italia (1994)
+6. Figure 5 – Robustness: Exposure to Mediaset and Voting for Forza Italia (1994)
+7. Table 5 – Exposure to Mediaset and Voting for Italian Main Parties (1994–2022) *(extension)*
+8. Table 6 – Exposure to Mediaset and Political Attitudes *(optional)*
+9. Table 10 – Exposure to Mediaset and Opinions about Berlusconi *(optional)*
 
 > {REPLICATOR}: leave comments here for partial results, caveats, and other observations
 
