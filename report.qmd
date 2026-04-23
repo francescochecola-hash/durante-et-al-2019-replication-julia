@@ -21,12 +21,13 @@ This report was created as part of the assessment for the [`Computational Econom
 
 ## Paper and Replication Package
 
-This report attempts a replication of 
+This report presents a replication of the empirical results in:
 
-* paper: DOI of published paper
-* replication package: DOI of package
+- Durante, R., Pinotti, P., and Tesei, A. (2019). *The Political Legacy of Entertainment TV*. American Economic Review, 109(7), 2497–2530. https://doi.org/10.1257/aer.20150958
 
-by using the `julia` computation language.
+- Durante, R., Pinotti, P., and Tesei, A. (2019). *Replication data for: The Political Legacy of Entertainment TV*. American Economic Association [publisher], distributed by ICPSR. https://doi.org/10.3886/E116167V1
+
+The analysis is conducted using the `Julia` programming language.
 
 We have been able to replicate the following exhibits:
 
