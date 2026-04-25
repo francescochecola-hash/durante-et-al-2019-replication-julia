@@ -123,6 +123,15 @@ display(names(df))
 ```
 
 ```{julia}
+using GeoDataFrames
+
+comuni = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
+
+display(names(comuni))
+display(first(comuni, 5))
+```
+
+```{julia}
 using DataFrames, Plots
 
 df_unique = unique(df, :istat)
