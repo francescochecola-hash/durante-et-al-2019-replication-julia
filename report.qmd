@@ -108,12 +108,6 @@ Panel A shows predicted signal strength, while Panel B reports signal strength i
 Work in progress: data cleaning and geographical mapping.
 
 ```{julia}
-using Plots
-
-plot(rand(10), title="Placeholder – Signal Strength")
-```
-
-```{julia}
 using StatFiles, DataFrames
 
 df = DataFrame(load("replication-package/data/raw/municipality-level_data.dta"))
@@ -127,48 +121,31 @@ using GeoDataFrames
 
 municipalities = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
 
-display(names(municipalities))
 display(first(municipalities, 5))
+display(names(municipalities))
 ```
 
 ```{julia}
-using DataFrames, Plots, GeoDataFrames
+using DataFrames, Plots
 
-# shapefile
-municipalities = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
-
-# data (one row for municipality)
 df_unique = unique(df, :istat)
 
-# Harmonize the ISTAT municipality identifier by converting it from Float64 to integer,
-# ensuring compatibility with the shapefile coding (PRO_COM) for accurate merging.
+df_unique = filter(row -> !ismissing(row.istat), df_unique)
 df_unique.istat = Int.(df_unique.istat)
 
-# merge
 df_map = leftjoin(municipalities, df_unique, on = :PRO_COM => :istat)
 
-# remove missing
 df_map = filter(row ->
     !ismissing(row.signal_nonstand) &&
     !ismissing(row.signalfree_nonstand),
     df_map
 )
 
-# Panel A
-p1 = plot(
-    df_map,
-    color = :signal_nonstand,
-    legend = false,
-    title = "Panel A. Predicted signal strength"
-)
+p1 = plot(df_map, color = :signal_nonstand, legend = false,
+    title = "Panel A. Predicted signal strength")
 
-# Panel B
-p2 = plot(
-    df_map,
-    color = :signalfree_nonstand,
-    legend = false,
-    title = "Panel B. Signal strength in free space"
-)
+p2 = plot(df_map, color = :signalfree_nonstand, legend = false,
+    title = "Panel B. Signal strength in free space")
 
 plot(p1, p2, layout = (1, 2), size = (1000, 450))
 ```
