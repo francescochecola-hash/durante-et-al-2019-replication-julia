@@ -125,47 +125,49 @@ display(names(df))
 ```{julia}
 using GeoDataFrames
 
-comuni = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
+municipalities = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
 
-display(names(comuni))
-display(first(comuni, 5))
+display(names(municipalities))
+display(first(municipalities, 5))
 ```
 
 ```{julia}
-using DataFrames, Plots
+using DataFrames, Plots, GeoDataFrames
 
+# shapefile
+municipalities = GeoDataFrames.read("replication-package/data/raw/Com01012013/Com01012013_WGS84.shp")
+
+# data (one row for municipality)
 df_unique = unique(df, :istat)
 
+# Harmonize the ISTAT municipality identifier by converting it from Float64 to integer,
+# ensuring compatibility with the shapefile coding (PRO_COM) for accurate merging.
+df_unique.istat = Int.(df_unique.istat)
+
+# merge
+df_map = leftjoin(municipalities, df_unique, on = :PRO_COM => :istat)
+
+# remove missing
 df_map = filter(row ->
-    !ismissing(row.longitude) &&
-    !ismissing(row.latitude) &&
     !ismissing(row.signal_nonstand) &&
     !ismissing(row.signalfree_nonstand),
-    df_unique
+    df_map
 )
 
-p1 = scatter(
-    df_map.longitude,
-    df_map.latitude,
-    marker_z = df_map.signal_nonstand,
-    ms = 2,
+# Panel A
+p1 = plot(
+    df_map,
+    color = :signal_nonstand,
     legend = false,
-    title = "Panel A. Predicted signal strength",
-    xlabel = "",
-    ylabel = "",
-    colorbar = true
+    title = "Panel A. Predicted signal strength"
 )
 
-p2 = scatter(
-    df_map.longitude,
-    df_map.latitude,
-    marker_z = df_map.signalfree_nonstand,
-    ms = 2,
+# Panel B
+p2 = plot(
+    df_map,
+    color = :signalfree_nonstand,
     legend = false,
-    title = "Panel B. Signal strength in free space",
-    xlabel = "",
-    ylabel = "",
-    colorbar = true
+    title = "Panel B. Signal strength in free space"
 )
 
 plot(p1, p2, layout = (1, 2), size = (1000, 450))
