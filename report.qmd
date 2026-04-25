@@ -138,7 +138,7 @@ df_map = filter(row ->
 p1 = scatter(
     df_map.longitude,
     df_map.latitude,
-    marker_z = df_map.signal,
+    marker_z = df_map.signal_nonstand,
     ms = 2,
     legend = false,
     title = "Panel A. Predicted signal strength",
@@ -150,7 +150,7 @@ p1 = scatter(
 p2 = scatter(
     df_map.longitude,
     df_map.latitude,
-    marker_z = df_map.signalfree,
+    marker_z = df_map.signalfree_nonstand,
     ms = 2,
     legend = false,
     title = "Panel B. Signal strength in free space",
