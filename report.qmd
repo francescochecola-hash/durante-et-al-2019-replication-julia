@@ -125,12 +125,20 @@ display(names(df))
 ```{julia}
 using DataFrames, Plots
 
-df1985 = filter(row -> row.year == 1985, df)
+df_unique = unique(df, :istat)
+
+df_map = filter(row ->
+    !ismissing(row.longitude) &&
+    !ismissing(row.latitude) &&
+    !ismissing(row.signal_nonstand) &&
+    !ismissing(row.signalfree_nonstand),
+    df_unique
+)
 
 p1 = scatter(
-    df1985.longitude,
-    df1985.latitude,
-    marker_z = df1985.signal,
+    df_map.longitude,
+    df_map.latitude,
+    marker_z = df_map.signal,
     ms = 2,
     legend = false,
     title = "Panel A. Predicted signal strength",
@@ -140,9 +148,9 @@ p1 = scatter(
 )
 
 p2 = scatter(
-    df1985.longitude,
-    df1985.latitude,
-    marker_z = df1985.signalfree,
+    df_map.longitude,
+    df_map.latitude,
+    marker_z = df_map.signalfree,
     ms = 2,
     legend = false,
     title = "Panel B. Signal strength in free space",
