@@ -126,7 +126,7 @@ display(names(municipalities))
 ```
 
 ```{julia}
-using DataFrames, Plots
+using DataFrames, CairoMakie, GeoMakie
 
 df_unique = unique(df, :istat)
 
@@ -141,11 +141,13 @@ df_map = filter(row ->
     df_map
 )
 
-p1 = plot(df_map, color = :signal_nonstand, legend = false,
-    title = "Panel A. Predicted signal strength")
+fig = Figure(size = (1000, 450))
 
-p2 = plot(df_map, color = :signalfree_nonstand, legend = false,
-    title = "Panel B. Signal strength in free space")
+ax1 = GeoAxis(fig[1, 1], title = "Panel A. Predicted signal strength")
+poly!(ax1, df_map.geometry, color = df_map.signal_nonstand, strokewidth = 0)
 
-plot(p1, p2, layout = (1, 2), size = (1000, 450))
+ax2 = GeoAxis(fig[1, 2], title = "Panel B. Signal strength in free space")
+poly!(ax2, df_map.geometry, color = df_map.signalfree_nonstand, strokewidth = 0)
+
+fig
 ```
